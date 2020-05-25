@@ -62,6 +62,11 @@ func makeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.Handl
 }
 
 func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000"
+	}
+
 	http.HandleFunc("/api/route/", makeHandler(routeHandler))
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
