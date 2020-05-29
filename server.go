@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+
+	"virtultra.com/api/route"
 )
 
 var validPath = regexp.MustCompile("^/api/(route|SOMEOTHERROUTE)/([a-zA-Z0-9]+)$")
@@ -27,6 +29,6 @@ func main() {
 		port = "5000"
 	}
 
-	http.HandleFunc("/api/route/", makeHandler(routeHandler))
+	http.HandleFunc("/api/route/", makeHandler(route.RouteHandler))
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
